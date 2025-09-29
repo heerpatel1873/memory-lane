@@ -832,3 +832,139 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetBtn = document.getElementById("resetMemoryBtn");
   if (resetBtn) resetBtn.addEventListener("click", resetMemories);
 });
+
+// notes and todos code below
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("todo-input");   // ADDED: expected in HTML
+  const addBtn = document.getElementById("add-btn");     // ADDED: expected in HTML
+  const list = document.getElementById("todo-list");     // ADDED: expected in HTML
+  const notesBox = document.getElementById("daily-notes");
+  const saveNotesBtn = document.getElementById("save-notes-btn");
+
+  // --- load / migrate tasks ---
+  function loadTasksFromStorage() {
+    // If we already have the new format, use it
+    let stored = localStorage.getItem("tasksObj");
+    if (stored) {
+      try {
+        return JSON.parse(stored) || [];
+      } catch {
+        // fall through to older format
+      }
+    }
+
+    // Migration: if there is an old "tasks" array of strings, convert it
+    const old = JSON.parse(localStorage.getItem("tasks")) || [];
+    if (old.length) {
+      const migrated = old.map((t, i) => ({ id: Date.now() + i, text: t, done: false }));
+      localStorage.setItem("tasksObj", JSON.stringify(migrated));
+      return migrated;
+    }
+
+    return [];
+  }
+
+  let tasks = loadTasksFromStorage();
+
+  // --- rendering ---
+  function renderTasks() {
+    list.innerHTML = "";
+    tasks.forEach(task => {
+      const li = document.createElement("li");
+      li.className = "task-bubble";
+      li.dataset.id = task.id;
+
+      // label contains checkbox + text (so clicking text toggles checkbox)
+      const label = document.createElement("label");
+      label.className = "task-label";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "task-checkbox";
+      checkbox.checked = !!task.done;
+      checkbox.setAttribute("aria-label", task.text);
+
+      const span = document.createElement("span");
+      span.className = "task-text";
+      span.textContent = task.text;
+
+      label.appendChild(checkbox);
+      label.appendChild(span);
+
+      // delete button
+      const del = document.createElement("button");
+      del.className = "task-delete";
+      del.title = "Delete";
+      del.innerHTML = "✕";
+
+      li.appendChild(label);
+      li.appendChild(del);
+
+      if (task.done) li.classList.add("task-done");
+
+      list.appendChild(li);
+    });
+  }
+
+  // --- persistence ---
+  function saveTasks() {
+    localStorage.setItem("tasksObj", JSON.stringify(tasks));
+  }
+
+  // --- actions ---
+  function addTask() {
+    const text = input.value.trim();
+    if (!text) return;
+    const task = { id: Date.now(), text, done: false };
+    tasks.unshift(task); // newest first
+    saveTasks();
+    renderTasks();
+    input.value = "";
+    input.focus();
+  }
+
+  // Add by button
+  if (addBtn) addBtn.addEventListener("click", addTask);
+
+  // Add by Enter key
+  if (input) input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addTask();
+  });
+
+  // Delegate checkbox change and delete button clicks
+  list.addEventListener("change", (e) => {
+    if (e.target.classList.contains("task-checkbox")) {
+      const li = e.target.closest("li");
+      const id = Number(li.dataset.id);
+      const t = tasks.find(x => x.id === id);
+      if (!t) return;
+      t.done = e.target.checked;
+      if (t.done) li.classList.add("task-done"); else li.classList.remove("task-done");
+      saveTasks();
+    }
+  });
+
+  list.addEventListener("click", (e) => {
+    if (e.target.classList.contains("task-delete")) {
+      const li = e.target.closest("li");
+      const id = Number(li.dataset.id);
+      tasks = tasks.filter(x => x.id !== id);
+      saveTasks();
+      renderTasks();
+    }
+  });
+
+  // --- notes save (keeps previous behavior) ---
+  if (saveNotesBtn && notesBox) {
+    saveNotesBtn.addEventListener("click", () => {
+      localStorage.setItem("notes", notesBox.value);
+      // optional: small feedback
+      saveNotesBtn.textContent = "Saved ✓";
+      setTimeout(() => saveNotesBtn.textContent = "Save Notes", 900);
+    });
+  }
+
+  // initial render
+  renderTasks();
+});
