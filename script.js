@@ -1,627 +1,834 @@
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-image: linear-gradient (white, #cfc2ff);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  font-family: 'Times New Roman', serif;
+// const { memo } = require("react");
+
+function switchPage(pageId, button) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
 }
 
-.page {
-  display: none;
-}
+// On load: Check if user is remembered
+window.onload = function () {
+  const name = localStorage.getItem('userName');
 
-.page.active {
-  display: block;
-}
-
-.banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #cfc2ff;
-  padding: 10px 20px;
-  height: 120px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-#logo {
-  width: 200px;
-  height: auto;
-  margin-left: 10px;
-  margin-top: 30px;
-}
-
-.logo-title{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-
-#title {
-  display: flex;
-  align-items: center;
-  color: white;
-  margin-bottom: 50px;
-  font-size: 60px;
-}
-
-#games {
-  background-color: rgb(255, 214, 238);
-  color: rgb(255, 255, 255);
-  font-size: 17px;
-  padding-top: 20px;
-  border: 10px dotted deeppink;
-}
-
-#hovers{
-  text-align: center;
-  margin-top: 160px;
-}
-
-.insta-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  border-top: 2px solid #eee;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0;
-  z-index: 1000;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.tab-btn {
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #aaa;
-  transition: 0.3s ease;
-}
-
-.tab-btn.active {
-  color: #de4ac3;
-  transform: scale(1.2);
-  text-shadow: 0 0 8px #ffbdf2;
-}
-
-.tab-btn:hover {
-  color: #de4ac3;
-}
-
-.game-btn {
-  font-family: "Lucida Console", "Courier New", monospace;
-  background: deeppink;
-  color: rgb(255, 214, 238);
-  border: none;
-  padding: 15px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease; 
-  font-size: 16px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
-.game-btn:hover {
-  background-color: #f3f0ff;
-  color: #c37cfe;
-  transform: scale(1.2);
-}
-/*
-.button-bar {
-  display: flex;
-  gap: 20px;
-  padding-right: 20px;
-}
-*/
-
-
-/*#form {
-  color: #de4ac3;
-}*/
-
-#welcomeMessage{
-  text-align: center;
-  padding-top: 20px;
-}
-
-.matching {
-  display: grid;
-  grid-template-columns: repeat(4, 100px);
-  gap: 10px;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.card {
-  width: 100px;
-  height: 100px;
-  background-color: #9eb6ff;
-  border-radius: 8px;
-  font-size: 40px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-
-.card.flipped {
-  background-color: #c2ebff;
-}
-
-#gameMessage{
-  text-align: center;
-  margin-top: 20px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-#playAgain{
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ffdbfc;
-  color: #de4ac3;
-  border: 2px solid #de4ac3;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#playAgain:hover{
-  background-color: #de4ac3;
-  color: white
-}
-
-
-#video{
-  display: flex;
-  justify-content: center;
-}
-
-/* login screen */ 
-#loginScreen {
-  text-align: center;
-  padding-top: 200px;
-  background-color: #fff0f7;
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-}
-
-#loginScreen input {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #de4ac3;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-#loginScreen button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #de4ac3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-/* logout button */
-#logoutBtn {
-  background-color: #ffdbfc;
-  color: #de4ac3;
-  border: 2px solid #de4ac3;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-  margin-right: 20px;
-}
-
-#logoutBtn:hover {
-  background-color: #de4ac3;
-  color: white;
-}
-
-#video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 50px;
-}
-
-.game-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
-}
-
-.game-buttons button {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #de4ac3;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.game-buttons button:hover {
-  background-color: #c23cb0;
-}
-
-.game-section {
-  display: none;
-  margin-top: 20px;
-}
-
-/* FOR THE WORD GUESS GAME */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: "Poppins";
-}
-
-.container {
-  background: rgb(140, 207, 236);
-  border-radius: 10px;
-  padding: 25px;
-  margin-top: 10px;
-  box-shadow: 14px 14px 0 0 #ffffff;
-}
-
-.gameCards {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-}
-
-.cards {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 1 px solid rgb(255, 255, 255);
-  background: rgb(23, 37, 84);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 10px 10px 5 px rgb(255, 255, 255);
-  flex-direction: column;
-  font-size: 18px;
-  user-select: none;
-}
-
-.cards:hover,
-.cards.active {
-  background: white;
-  color:rgb(23, 37, 84);
-}
-
-.btn {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn button {
-  height: 40px;
-  padding: 10px 25px;
-  margin: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background:rgb(23, 37, 84);
-  color: white;
-  cursor: pointer;
-  box-shadow: 10px 10px 5 px rgb(255, 255, 255);
-  user-select: none;
-}
-
-.playground,
-.resetSelection {
-  display: none;
-}
-
-.questionHint {
-  text-transform: capitalize;
-  user-select: none;
-  text-align: center;
-}
-
-.selectedWords,
-.shuffledWords {
-  display: flex;
-  gap: 25px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-.selectedWords .box,
-.shuffledWords .box {
-  width: 55px;
-  height: 55px;
-  background: white;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color:rgb(23, 37, 84);
-  text-transform: capitalize;
-  cursor: pointer;
-  user-select: none;
-}
-
-.box.match {
-  animation: rubberBand 1s linear forwards;
-}
-
-@keyframes rubberBand {
-  0% {
-    transform: scaleX(1);
+  if (name) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('hovers').style.display = 'block';
+    document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#de4ac3">${name}</span> 🧠`;
+    createMemoryGame();
+  } else {
+    document.getElementById('loginScreen').style.display = 'block';
+    document.getElementById('hovers').style.display = 'none';
   }
-  40% {
-    transform: scaleX(1.12) scaleY(0.75);
+};
+
+// Login and start app
+function startApp() {
+  const name = document.getElementById('loginName').value.trim();
+  if (!name) return;
+
+  localStorage.setItem('userName', name);
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('hovers').style.display = 'block';
+  document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#de4ac3">${name}</span> 🧠`;
+
+  createMemoryGame();
+}
+
+// Logout function
+function resetUser() {
+  localStorage.clear();
+  location.reload();
+}
+
+// Create memory game
+let gameInitialized = false;
+
+function createMemoryGame() {
+  if (gameInitialized) return;
+  gameInitialized = true;
+
+  const board = document.querySelector('.matching');
+  const gameMessage = document.getElementById('gameMessage');
+  const playAgainBtn = document.getElementById('playAgain');
+
+  board.innerHTML = ''; // clear previous game cards
+  gameMessage.innerHTML = '';
+  playAgainBtn.style.display = 'none';
+
+  const emojis = ['🌸', '🌸', '🍓', '🍓', '🦩', '🦩', '🎀', '🎀'];
+  const shuffled = emojis.sort(() => 0.5 - Math.random());
+
+  let flippedCards = [];
+  let lockBoard = false;
+  let matchedPairs = 0;
+
+  shuffled.forEach(emoji => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.emoji = emoji;
+    card.textContent = '';
+
+    card.addEventListener('click', () => {
+      if (lockBoard || card.classList.contains('flipped')) return;
+
+      card.textContent = emoji;
+      card.classList.add('flipped');
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        lockBoard = true;
+        const [card1, card2] = flippedCards;
+
+        if (card1.dataset.emoji === card2.dataset.emoji) {
+          matchedPairs++;
+          flippedCards = [];
+          lockBoard = false;
+
+          // Check if all pairs found (win condition)
+          if (matchedPairs === emojis.length / 2) {
+            gameMessage.innerHTML = `<h2 style="color:deeppink;">🎉 You Win! 🎉</h2>`;
+            playAgainBtn.style.display = 'inline-block';
+            confetti({
+              particleCount: 150,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: ['#deaaff', '#ff9acf', '#a6ddf7', '#f6ccff']
+            });
+          }
+
+        } else {
+          // Not a match: flip back cards after delay
+          setTimeout(() => {
+            card1.classList.remove('flipped');
+            card2.classList.remove('flipped');
+            card1.textContent = '';
+            card2.textContent = '';
+            flippedCards = [];
+            lockBoard = false;
+          }, 1000);
+        }
+      }
+    });
+
+    board.appendChild(card);
+  });
+}
+
+function restartGame() {
+  gameInitialized = false;
+  createMemoryGame();
+}
+
+function showGame(gameId) {
+  // Hide all game sections
+  document.querySelectorAll('.game-section').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  // Show the selected game
+  const selectedGame = document.getElementById(gameId);
+  selectedGame.style.display = 'block';
+
+  // If it's matching, build the game
+  if (gameId === 'matchingGame') {
+    createMemoryGame(); // Only builds it once, already handled by your gameInitialized check
   }
-  55% {
-    transform: scaleX(0.85) scaleY(0.1);
-  }
-  65% {
-    transform: scaleX(1.09) scaleY(0.85);
-  }
-  75% {
-    transform: scaleX(0.9) scaleY(1);
-  }
-  90% {
-    transform: scaleX(1.05) scaleY(0.95);
-  }
-  100% {
-    transform: scaleX(1) scaleY(1);
+
+  if (gameId === 'sortingGame') {
+    showHomeScreen();
+    initSortingGameListeners();
   }
 }
 
-.box.shake {
-  animation: shake 0.35s ease-in-out;
-}
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
+// word guess game
+let AnimalsArr = [
+  {
+    question: "it had two wings and two legs",
+    word: "bird",
+  },
+  {
+    question: "a small animal related to lions",
+    word: "cat",
+  },
+  {
+    question: "kept for its eggs and meat",
+    word: "chicken",
+  },
+  {
+    question: "it has a long nose called a trunk",
+    word: "elephant",
+  },
+  {
+    question: "a mammal with a very long neck, long legs",
+    word: "giraffe",
+  },
+];
+
+let FoodsArr = [
+  {
+    question: "a food made by baking a dough of flour or meal",
+    word: 'bread',
+  },
+  {
+    question: "the first meal of the day",
+    word: "breakfast",
+  },
+  {
+    question: "a long orange root vegetable",
+    word: "carrot",
+  },
+  {
+    question: "the liquid from fruits that is used for drinking",
+    word: "juice",
+  },
+  {
+    question: "a candy or syrup made of cacao and sugar",
+    word: "chocolate",
+  },
+];
+
+let SportsArr = [
+  {
+    question: "a sport where two people hit each other and try to win",
+    word: "boxing",
+  },
+  {
+    question: "a game in which a club is used to hit a small ball into a hole",
+    word: "golf",
+  },
+  {
+    question: "a sport played on ice with two teams",
+    word: "hockey",
+  },
+  {
+    question: "a game played on a court with two teams trying to throw a ball into the hoop",
+    word: "basketball",
+  },
+  {
+    question: "an activity where you catch fish",
+    word: "fishing",
+  },
+];
+
+let selectedOption = "Animals",
+questionCount = 0;
+ideaCount = true;
+
+const gameCards = document.querySelector(".gameCards"),
+  allCards = document.querySelectorAll(".gameCards .cards"),
+  playground = document.querySelector(".playground"),
+  startGame = document.querySelector(".startGame"),
+  questionHint = document.querySelector(".questionHint"),
+  resetSelection = document.querySelector(".resetSelection"),
+  selectedWords = document.querySelector(".selectedWords"),
+  shuffledWords = document.querySelector(".shuffledWords");
+
+  allCards.forEach(card=>{
+    card.addEventListener("click", (e)=>{
+
+      allCards.forEach(el=>{
+        el.classList.remove("active");
+      });
+      e.target.classList.add("active");
+      selectedOption = e.target.getAttribute("data-options");
+    })
+  });
+
+startGame.addEventListener("click",()=>{
+  if(startGame.innerText=="Start Game"){
+    gameCards.style.display="none";
+    playground.style.display="block";
+    startGame.innerText="Back to Home";
+    resetSelection.style.display="inline";
+    resetSelection.setAttribute("disabled",true);
+    startToGuessTheWord()
   }
-  20% {
-    transform: translateX(-13px);
+  else{
+    gameCards.style.display="flex";
+    playground.style.display="none";
+    startGame.innerText="Start Game";
+    resetSelection.style.display="none";
+    questionCount=0;
+    ideaCount=true;
   }
-  40% {
-    transform: translateX(13px);
+});
+
+let selectedArr = [];
+  randomWords = [];
+function startToGuessTheWord(){
+  selectedWords.innerHTML="";
+  shuffledWords.innerHTML="";
+  ideaCount=true;
+
+  if(selectedOption=="Animals"){
+    selectedArr = AnimalsArr;
   }
-  60% {
-    transform: translateX(-8px);
+  else if (selectedOption=="Foods"){
+    selectedArr = FoodsArr;
   }
-  80% {
-    transform: translateX(8px);
-  }
-}
-
-/* sorting game */
-#game-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.tube {
-  width: 60px;
-  height: 240px;
-  border: 2px solid #444;
-  border-radius: 10px;
-  background: white;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  padding: 5px;
-}
-
-.tube.locked {
-  border-color: green;
-  box-shadow: 0 0 10px green;
-  pointer-events: none;
-}
-
-.ball {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: 4px 0;
-  cursor: grab;
-  background-size: cover;
-  background-position: center;
-  border: none;
-}
-
-
-.ball:active {
-  cursor: grabbing;
-}
-
-
-/* #sortTitle {
-  font-family: 'Pacifico', cursive;
-  font-size: clamp(2rem, 5vw, 4em);
-  font-weight: 700;
-  background: linear-gradient(270deg, #f39c12, #4a90e2, #f39c12);
-  background-size: 600% 600%;
-  /* -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: white;
-  animation: gradientMove 8s ease infinite;
-  text-align: center;
-  user-select: none;
-  margin: 50px 0;
-} */ 
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-#home-screen {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
-}
-
-.level-btn {
-  background: white;
-  border-radius: 12px;
-  padding: 10px;
-  cursor: pointer;
-  color: #333;
-  width: 150px;
-  max-width: 80vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.level-btn img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-
-.level-btn:hover {
-  background: rgb(160, 159, 159);
-  color: white;
-  border-color: #fff;
-}
-.bubbles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.bubble {
-  position: absolute;
-  bottom: -100px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(173,216,230,0.5));
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-  animation: rise 10s linear infinite;
-}
-
-
-.bubble:nth-child(1) { width: 30px; height: 30px; left: 10%; animation-delay: 0s; }
-.bubble:nth-child(2) { width: 20px; height: 20px; left: 30%; animation-delay: 2s; }
-.bubble:nth-child(3) { width: 40px; height: 40px; left: 50%; animation-delay: 4s; }
-.bubble:nth-child(4) { width: 25px; height: 25px; left: 70%; animation-delay: 1s; }
-.bubble:nth-child(5) { width: 15px; height: 15px; left: 85%; animation-delay: 3s; }
-
-@keyframes rise {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
-}
-/* 💡 Responsive tweaks for smaller screens */
-@media (max-width: 622px) {
-  .tube {
-    width: 40px;
-    height: 160px;
-    padding: 3px;
+  else{
+    selectedArr = SportsArr;
   }
 
-  .ball {
-    width: 35px;
-    height: 35px;
-    margin: 3px 0;
+  questionHint.innerHTML=selectedArr[questionCount].question + " " + `<i class="fa-solid fa-lightbulb" onclick="checkFirstWordIdea(this)"></i>`;
+  randomWords = selectedArr[questionCount].word.split("");
+
+  if(randomWords!=null){
+    let checkRandom = randomWords;
+    shuffle(randomWords);
+
+    if(checkRandom==randomWords){
+      shuffle(randomWords);
+    }
+
+    randomWords.forEach(char=>{
+      let div1 =document.createElement("div");
+      div1.classList.add("box");
+      selectedWords.append(div1);
+
+      let div2 =document.createElement("div");
+      div2.classList.add("box");
+      div2.innerHTML=char;
+      div2.addEventListener("click",(e)=>{
+        chooseWordToGuess(e.target.innerText)
+        e.target.innerText="";
+        e.target.style.background = "lightgray";
+      })
+      shuffledWords.append(div2);
+    })
   }
 }
 
-@media (max-width: 480px) {
-  .tube {
-    width: 30px;
-    height: 120px;
-    padding: 2px;
+function chooseWordToGuess(char){
+  const boxes = document.querySelectorAll(".selectedWords .box");
+  let isWordPlaced = true,
+  totalWords=0;
+  correctWords="";
+
+  boxes.forEach((box)=>{
+    if(isWordPlaced && box.innerText==""){
+      box.innerText=char;
+      isWordPlaced=false;
+    }
+
+    if(box.innerText!=""){
+      correctWords+=box.innerText.toLowerCase();
+      totalWords++;
+    }
+  });
+
+  if(totalWords==randomWords.length){
+  checkSelectedWord(correctWords);
+  }
+}
+
+function checkSelectedWord(correctAnswer){
+  const boxes = document.querySelectorAll(".selectedWords .box");
+
+  if(selectedArr[questionCount].word == correctAnswer){
+    boxes.forEach(box=>{
+      box.classList.add("match");
+    });
+    setTimeout(function(){
+      questionCount++;
+      if(questionCount<5){
+        startToGuessTheWord();
+      }
+      else{
+        alert("Word Game Completed! Back to Home");
+      }
+    },2000);
+  }
+  else{
+    boxes.forEach(box=>{
+      box.classList.add("shake");
+    });
+    resetSelection.removeAttribute("disabled");
+  }
+}
+
+resetSelection.addEventListener("click", (e)=>{
+  startToGuessTheWord();
+  resetSelection.setAttribute("disabled", true);
+})
+
+const shuffle = (array)=>{
+  for (let i = array.length-1; i > 0; i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]] = [array[j],array[i]];
+  }
+  return array;
+}
+
+function checkFirstWordIdea(bulb){
+  if(ideaCount){
+    const boxes1 = document.querySelectorAll(".selectedWords .box");
+    const boxes2 = document.querySelectorAll(".shuffledWords .box");
+
+    let nextWord = 0;
+
+    boxes1.forEach(box=>{
+      if(box.innerText!=""){
+        nextWord++;
+      }
+    });
+
+    let findIdea = selectedArr[questionCount].word.split("")[nextWord];
+
+    for(let box of boxes2){
+      if(box.innerText.toLowerCase()==findIdea){
+        box.click();
+        bulb.style.color = "green";
+        break;
+      }
+      else{
+      bulb.style.color = "red";
+      resetSelection.removeAttribute("disabled");
+      }
+    }
+    ideaCount=false;
+  }
+}
+
+
+
+// sorting game code below
+const audio = new Audio("dreamy.mp3");
+const bubbleSound = new Audio("bubble.mp3");
+const doneSlotSound = new Audio("doneSlot.mp3");
+const levelComplete = new Audio("levelComplete.mp3");
+audio.play();
+audio.loop = true;
+let lockedTubes = new Set();
+
+// Different ball sets for different levels
+const levels = {
+  1: {
+    // Easy - 3 colors
+    ballImages: {
+      green: "images/1.png",
+      purple: "images/2.png",
+      blue: "images/3.png",
+    },
+    tubeCount: 5,
+    ballsPerTube: 4,
+  },
+  2: {
+    // Medium - 4 colors
+    ballImages: {
+      green: "images/1.png",
+      purple: "images/2.png",
+      blue: "images/3.png",
+      orange: "images/4.png",
+    },
+    tubeCount: 6,
+    ballsPerTube: 4,
+  },
+  3: {
+    // Hard - 6 colors
+    ballImages: {
+      green: "images/1.png",
+      purple: "images/2.png",
+      blue: "images/3.png",
+      orange: "images/4.png",
+      wave: "images/5.png",
+      stripe: "images/6.png",
+    },
+    tubeCount: 8,
+    ballsPerTube: 4,
+  },
+};
+
+let tubes = [];
+let ballId = 0;
+let currentLevel = null;
+
+function sort_shuffle(array) {
+  let current = array.length;
+  while (current !== 0) {
+    let random = Math.floor(Math.random() * current--);
+    [array[current], array[random]] = [array[random], array[current]];
+  }
+  return array;
+}
+
+function initGame(level) {
+  lockedTubes.clear();
+  currentLevel = level;
+  ballId = 0;
+
+  const { ballImages, tubeCount, ballsPerTube } = levels[level];
+  const allBalls = [];
+
+  Object.keys(ballImages).forEach((color) => {
+    for (let i = 0; i < ballsPerTube; i++) {
+      allBalls.push({ color, id: ballId++ });
+    }
+  });
+
+  sort_shuffle(allBalls);
+
+  tubes = [];
+  for (let i = 0; i < tubeCount; i++) {
+    tubes[i] = [];
   }
 
-  .ball {
-    width: 25px;
-    height: 25px;
-    margin: 2px 0;
+  let fillIndex = 0;
+  const colorKeys = Object.keys(ballImages);
+  for (let i = 0; i < colorKeys.length; i++) {
+    for (let j = 0; j < ballsPerTube; j++) {
+      tubes[fillIndex % (tubeCount - 2)].push(allBalls.pop());
+      fillIndex++;
+    }
+  }
+
+  render();
+}
+
+function render() {
+  const container = document.getElementById("game-container");
+  container.innerHTML = "";
+
+  tubes.forEach((tube, index) => {
+    const tubeDiv = document.createElement("div");
+    tubeDiv.classList.add("tube");
+    tubeDiv.dataset.index = index;
+    const isFull = tube.length === levels[currentLevel].ballsPerTube;
+    const isSameColor = tube.every((ball) => ball.color === tube[0]?.color);
+
+    if (isFull && isSameColor) {
+      tubeDiv.classList.add("locked");
+
+      if (!lockedTubes.has(index)) {
+        doneSlotSound.currentTime = 0; // dubara start se bajao
+        doneSlotSound.play(); // ✅ sound play
+        lockedTubes.add(index); // yaad rakho ki ye tube complete ho gayi
+      }
+    }
+
+    tubeDiv.addEventListener("dragover", (e) => e.preventDefault());
+    tubeDiv.addEventListener("drop", handleDrop);
+
+    tube.forEach((ball) => {
+      const ballDiv = document.createElement("div");
+      ballDiv.classList.add("ball");
+      ballDiv.style.backgroundImage = `url(${
+        levels[currentLevel].ballImages[ball.color]
+      })`;
+
+      ballDiv.setAttribute("draggable", "true");
+      ballDiv.dataset.id = ball.id;
+      ballDiv.dataset.color = ball.color;
+      ballDiv.dataset.tube = index;
+      ballDiv.addEventListener("dragstart", handleDragStart);
+      tubeDiv.appendChild(ballDiv);
+    });
+
+    container.appendChild(tubeDiv);
+  });
+}
+
+function handleDragStart(e) {
+  const tubeIndex = e.target.dataset.tube;
+  const ballId = e.target.dataset.id;
+  const tube = tubes[tubeIndex];
+  const topBall = tube[tube.length - 1];
+
+  // Only top ball can be dragged
+  if (topBall.id != ballId) {
+    e.preventDefault();
+    return;
+  }
+  // ✅ Play bubble sound
+  bubbleSound.currentTime = 0; // reset to start
+  bubbleSound.play();
+  e.dataTransfer.setData(
+    "text/plain",
+    JSON.stringify({ id: ballId, from: tubeIndex })
+  );
+}
+
+function handleDrop(e) {
+  const toIndex = e.currentTarget.dataset.index;
+  const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+  const fromIndex = data.from;
+
+  if (fromIndex === toIndex) return;
+
+  const fromTube = tubes[fromIndex];
+  const toTube = tubes[toIndex];
+
+  if (
+    fromTube.length === 0 ||
+    toTube.length >= levels[currentLevel].ballsPerTube
+  )
+    return;
+
+  const movingBall = fromTube[fromTube.length - 1];
+  const topTo = toTube[toTube.length - 1];
+
+  const tubeDiv = document.querySelector(`.tube[data-index="${toIndex}"]`);
+  const canDrop = !tubeDiv.classList.contains("locked");
+
+  if (canDrop) {
+    toTube.push(fromTube.pop());
+    // ✅ Play bubble sound again on drop
+    bubbleSound.currentTime = 0;
+    bubbleSound.play();
+    render();
+    checkCompletion();
   }
 }
 
-/* photo gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
-  margin: 15px auto;       /* centers the grid */
-  max-width: 600px;        /* keeps it from stretching too wide */
+function checkCompletion() {
+  let allComplete = true;
+  for (let tube of tubes) {
+    if (tube.length === 0) continue;
+    if (
+      tube.length !== levels[currentLevel].ballsPerTube ||
+      !tube.every((b) => b.color === tube[0].color)
+    ) {
+      allComplete = false;
+    }
+  }
+
+  if (allComplete) {
+    setTimeout(() => {
+      audio.pause();
+      levelComplete.play();
+      alert("🎉 Level " + currentLevel + " completed! You win!");
+      audio.play();
+
+      showHomeScreen();
+    }, 200);
+  }
 }
-.gallery div {
-  text-align: center;
+
+// Show home screen and hide game container
+function showHomeScreen() {
+  document.getElementById("home-screen").style.display = "flex";
+  document.getElementById("game-container").style.display = "none";
 }
-.gallery img {
-  width: 100%;
-  border-radius: 8px;
-  cursor: pointer;
+
+// Show game and hide home screen
+function showGameScreen(level) {
+  document.getElementById("home-screen").style.display = "none";
+  document.getElementById("game-container").style.display = "flex";
+  initGame(level);
 }
-.gallery p {
-  font-size: 14px;
-  margin: 5px 0 0;
+
+// Add event listeners to level buttons
+document.querySelectorAll(".level-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const level = button.dataset.level;
+    showGameScreen(level);
+  });
+});
+
+function initSortingGameListeners() {
+  document.querySelectorAll(".level-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const level = button.dataset.level;
+      showGameScreen(level);
+    });
+  });
 }
+
+// pic gallery code BELOW
+
+// // Store memories
+// let memories = JSON.parse(localStorage.getItem("memories")) || [];
+// let currentIndex = 0;
+// let slideshowInterval;
+
+// function saveMemories() {
+//   localStorage.setItem("memories", JSON.stringify(memories));
+// }
+
+// function addMemory() {
+//   const photoInput = document.getElementById("photoUpload");
+//   const captionInput = document.getElementById("captionInput");
+
+//   const photo = photoInput.files[0];
+//   const caption = captionInput.value.trim();
+//   if (!photo || !caption) return;
+
+//   const reader = new FileReader();
+//   reader.onload = function (e) {
+//     const newMemory = { img: e.target.result, caption: caption };
+//     memories.push(newMemory);
+//     saveMemories();
+//     displayMemories();
+
+//     // Clear inputs
+//     photoInput.value = "";
+//     captionInput.value = "";
+//   };
+//   reader.readAsDataURL(photo);
+// }
+
+// // Attach function to button
+// document.getElementById("addMemoryBtn").addEventListener("click", addMemory);
+
+// // Display existing memories on load
+// function displayMemories() {
+//   const thumbnails = document.getElementById("thumbnails");
+//   thumbnails.innerHTML = "";
+
+//   memories.forEach((memory, index) => {
+//     const img = document.createElement("img");
+//     img.src = memory.img;
+//     img.alt = memory.caption;
+//     img.classList.add("thumbnail");
+
+//     img.addEventListener("click", () => {
+//       document.getElementById("bigPhoto").src = memory.img;
+//       document.getElementById("bigCaption").textContent = memory.caption;
+//     });
+
+//     thumbnails.appendChild(img);
+//   });
+
+//   // Show last added as featured
+//   if (memories.length > 0) {
+//     const last = memories[memories.length - 1];
+//     document.getElementById("bigPhoto").src = last.img;
+//     document.getElementById("bigCaption").textContent = last.caption;
+//   }
+// }
+
+// function displayThumbnails() {
+//   const container = document.getElementById("thumbnails");
+//   if (!container) return;
+//   container.innerHTML = "";
+//   memories.forEach((m,i) => {
+//     const thumb = document.createElement("img");
+//     thumb.src = m.img;
+//     thumb.style.width = "60px";
+//     thumb.style.margin = "5px";
+//     thumb.style.cursor = "pointer";
+//     thumb.onclick = () => showMemory(i);
+//     container.appendChild(thumb);
+//   });
+// }
+
+// function showMemory(index) {
+//   const bigPhoto = document.getElementById("bigPhoto");
+//   const bigCaption = document.getElementById("bigCaption");
+
+//   if (!bigPhoto || !bigCaption) return;
+
+//   currentIndex = index;
+//   bigPhoto.src = memories[index].img;
+//   bigCaption.innerText = memories[index].caption;
+// }
+
+// function startSlideshow() {
+//   if (slideshowInterval) clearInterval(slideshowInterval);
+//   slideshowInterval = setInterval(() => {
+//     if (memories.length > 0) {
+//       currentIndex = (currentIndex + 1) % memories.length;
+//       showMemory(currentIndex);
+//     }
+//   }, 5000);
+// }
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const addBtn = document.getElementById("addMemoryBtn");
+//   if (addBtn) addBtn.addEventListener("click", addMemory);
+
+//   if (memories.length > 0) {
+//     displayThumbnails();
+//     showMemory(0);
+//     startSlideshow();
+//   }
+// });
+
+// Store memories safely
+let memories = [];
+try {
+  memories = JSON.parse(localStorage.getItem("memories")) || [];
+} catch {
+  memories = [];
+}
+
+function saveMemories() {
+  try {
+    localStorage.setItem("memories", JSON.stringify(memories));
+  } catch (e) {
+    console.error("Failed to save memories:", e);
+  }
+}
+
+function addMemory() {
+  const photoInput = document.getElementById("photoUpload");
+  const captionInput = document.getElementById("captionInput");
+  const photo = photoInput.files[0];
+  const caption = captionInput.value || "";
+
+  if (!photo) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    memories.push({ img: e.target.result, caption: caption });
+    saveMemories();
+    displayGallery();
+    photoInput.value = "";
+    captionInput.value = "";
+  };
+  reader.readAsDataURL(photo);
+}
+
+function displayGallery() {
+  const container = document.getElementById("gallery");
+  container.innerHTML = "";
+  memories.forEach((m, i) => {
+    const wrapper = document.createElement("div");
+    wrapper.style.textAlign = "center";
+    wrapper.style.margin = "10px";
+
+    const img = document.createElement("img");
+    img.src = m.img;
+    img.style.maxWidth = "200px";
+    img.style.height = "auto";
+    img.style.borderRadius = "8px";
+    img.style.display = "block";
+    img.style.margin = "0 auto";
+
+    const cap = document.createElement("p");
+    cap.innerText = m.caption;
+    cap.style.fontSize = "14px";
+    cap.style.color = "#333";
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(cap);
+    container.appendChild(wrapper);
+  });
+}
+
+function resetMemories() {
+  if (confirm("Are you sure you want to delete all memories?")) {
+    memories = [];
+    saveMemories();
+    displayGallery();
+  }
+}
+
+// Initialize gallery on page load
+document.addEventListener("DOMContentLoaded", () => {
+  displayGallery();
+
+  const addBtn = document.getElementById("addMemoryBtn");
+  if (addBtn) addBtn.addEventListener("click", addMemory);
+
+  const resetBtn = document.getElementById("resetMemoryBtn");
+  if (resetBtn) resetBtn.addEventListener("click", resetMemories);
+});
