@@ -625,3 +625,53 @@ body {
   font-size: 14px;
   margin: 5px 0 0;
 }
+
+
+/* To-do list/Notes section */
+/* TASK BUBBLE STYLES */
+#todo-list { padding: 0; margin: 12px 0; }
+.task-bubble {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  max-width: 480px;
+  margin: 8px auto; /* centers each bubble */
+}
+
+.task-label { display: flex; align-items: center; gap: 10px; flex: 1; cursor: pointer; }
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #4a90e2; /* nice blue check color */
+}
+
+.task-text {
+  font-size: 15px;
+  color: #222;
+  word-break: break-word;
+}
+
+/* finished look */
+.task-done .task-text {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.7;
+}
+
+/* delete button */
+.task-delete {
+  background: transparent;
+  border: none;
+  color: #c33;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+.task-delete:hover { background: rgba(0,0,0,0.04); }
