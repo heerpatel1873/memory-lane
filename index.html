@@ -8,6 +8,8 @@
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
@@ -30,19 +32,15 @@
     <div style="text-align: right; padding: 10px 20px;">
       <button id="logoutBtn" onclick="resetUser()">Log Out</button>
     </div>
-<!--
-    <nav class="button-bar">
-      <button class="tab-btn active" onclick="switchPage('home', this)">Home</button>
-      <button class="tab-btn" onclick="switchPage('games', this)">Games</button>
-      <button class="tab-btn" onclick="switchPage('info', this)">Info</button>
-    </nav>
--->
+
     <nav class="insta-bar">
       <button class="tab-btn active" onclick="switchPage('home', this)"><i class="fas fa-home"></i></button>
       <button class="tab-btn" onclick="switchPage('games', this)"><i class="fas fa-gamepad"></i></button>
       <button class="tab-btn" onclick="switchPage('info', this)"><i class="fas fa-info-circle"></i></button>
     </nav>
   </header>
+
+  <audio id="bgMusic"></audio>
 
   <!-- Main App Content -->
   <div id="hovers">
@@ -51,20 +49,20 @@
       <h1 id="homeHeading">Welcome Home</h1>
       <p>"Every moment of joy, no matter how small, is a victory worth celebrating. Let's make every day count and cherish the small victories that make life worth living."</p>
       <div id="welcomeMessage"></div>
-      <h2>Photo Gallery</h2>
+      <h2>photo gallery</h2>
       <p>Upload pictures of memories and people to be featured below. Add captions to remember special moments!</p>
 
       <!-- Upload -->
       <input type="file" id="photoUpload" accept="image/*"><br>
       <input type="text" id="captionInput" placeholder="Enter a caption"><br>
-      <button onclick="addMemory()">Add Memory</button>
-      <button onclick="resetMemories()">Reset Gallery</button>
+      <button id="addMem" onclick="addMemory()">Add Memory</button>
+      <button id="resetMem" onclick="resetMemories()">Reset Gallery</button>
 
       <!-- Gallery Grid -->
     <div id="gallery" class="gallery"></div>
 
     <!-- To-Do List Section -->
-    <h2>To-Do List</h2>
+    <h2> to-do list</h2>
     <div id="todo-section">
       <input type="text" id="todo-input" placeholder="Add a task...">
       <button id="add-btn">Add</button>
@@ -72,13 +70,12 @@
     </div>
 
     <!-- Daily Notes Section -->
-    <h2>Daily Notes</h2>
+    <h2>daily notes</h2>
     <div id="notes-section">
       <textarea id="daily-notes" placeholder="Write your notes here..."></textarea><br>
       <button id="save-notes-btn">Save Notes</button>
     </div>
   </div>
-
 
     <!-- Games Page -->
     <div id="games" class="page">
@@ -89,6 +86,8 @@
         <button class="game-btn" onclick="showGame('wordGuess')">Guess the Word</button>
         <button class="game-btn" onclick="showGame('sortingGame')">Sorting</button>
       </div>
+
+      <button id="music-btn">Play Music</button>
 
       <!-- Games -->
       <div id="matchingGame" class="game-section">
@@ -138,7 +137,7 @@
       </div>
 
       <div id="sortingGame" class="game-section">
-        <h2>Sorting Game></h2>
+        <h2>Sorting Game</h2>
         <div class = "bubbles">
           <div class="bubble"></div>
           <div class="bubble"></div>

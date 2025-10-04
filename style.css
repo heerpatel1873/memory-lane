@@ -3,11 +3,12 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient (white, #cfc2ff);
+  background-image: #fdfcfa;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  font-family: 'Times New Roman', serif;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 22px;
 }
 
 .page {
@@ -22,7 +23,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #cfc2ff;
+  background: #96f2ff;
   padding: 10px 20px;
   height: 120px;
   position: fixed;
@@ -33,10 +34,10 @@ body {
 }
 
 #logo {
-  width: 200px;
+  width: 100px;
   height: auto;
   margin-left: 10px;
-  margin-top: 30px;
+  border-radius: 16px;
 }
 
 .logo-title{
@@ -50,21 +51,31 @@ body {
   display: flex;
   align-items: center;
   color: white;
-  margin-bottom: 50px;
-  font-size: 60px;
+  font-size: 70px;
+  font-family: 'Fredoka One', sans-serif;
+  margin-bottom: 0;
 }
 
 #games {
-  background-color: rgb(255, 214, 238);
-  color: rgb(255, 255, 255);
+  background-color:  #fcdeb8;
+  color: #fc5dad;
   font-size: 17px;
   padding-top: 20px;
-  border: 10px dotted deeppink;
+  border: 10px dotted  #fc5dad;
+}
+
+#games h1,
+#games p {
+  margin-bottom: 18px;
 }
 
 #hovers{
   text-align: center;
   margin-top: 160px;
+  padding-bottom: 120px; 
+  padding-top: 5px;  
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .insta-bar {
@@ -85,24 +96,24 @@ body {
 .tab-btn {
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 36px;
   cursor: pointer;
   color: #aaa;
   transition: 0.3s ease;
 }
 
 .tab-btn.active {
-  color: #de4ac3;
+  color:#d773ff;
   transform: scale(1.2);
-  text-shadow: 0 0 8px #ffbdf2;
+  text-shadow: 0 0 8px #eec8fe;
 }
 
 .tab-btn:hover {
-  color: #de4ac3;
+  color: #d773ff;
 }
 
 .game-btn {
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family: 'Fredoka', sans-serif;
   background: deeppink;
   color: rgb(255, 214, 238);
   border: none;
@@ -112,8 +123,12 @@ body {
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease; 
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   margin-right: 20px;
+}
+
+.btn {
+  margin-top: 28px;
 }
 
 .game-btn:hover {
@@ -121,18 +136,6 @@ body {
   color: #c37cfe;
   transform: scale(1.2);
 }
-/*
-.button-bar {
-  display: flex;
-  gap: 20px;
-  padding-right: 20px;
-}
-*/
-
-
-/*#form {
-  color: #de4ac3;
-}*/
 
 #welcomeMessage{
   text-align: center;
@@ -141,16 +144,16 @@ body {
 
 .matching {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  gap: 10px;
+  grid-template-columns: repeat(4, 120px);
+  gap: 20px;
   justify-content: center;
   margin-top: 40px;
 }
 
 .card {
-  width: 100px;
-  height: 100px;
-  background-color: #9eb6ff;
+  width: 120px;
+  height: 120px;
+  background-color: #c9a7ff;
   border-radius: 8px;
   font-size: 40px;
   color: white;
@@ -162,7 +165,7 @@ body {
 }
 
 .card.flipped {
-  background-color: #c2ebff;
+  background-color: #ede2fe;
 }
 
 #gameMessage{
@@ -200,7 +203,7 @@ body {
 #loginScreen {
   text-align: center;
   padding-top: 200px;
-  background-color: #fff0f7;
+  background-color: #f6e2fe;
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -212,7 +215,7 @@ body {
 #loginScreen input {
   padding: 10px;
   font-size: 16px;
-  border: 2px solid #de4ac3;
+  border: 2px solid  #d773ff;
   border-radius: 8px;
   margin-top: 10px;
 }
@@ -220,7 +223,7 @@ body {
 #loginScreen button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #de4ac3;
+  background-color:  #d773ff;
   color: white;
   border: none;
   border-radius: 8px;
@@ -230,9 +233,9 @@ body {
 
 /* logout button */
 #logoutBtn {
-  background-color: #ffdbfc;
-  color: #de4ac3;
-  border: 2px solid #de4ac3;
+  background-color:  #f6e2fe;
+  color:  #d773ff;
+  border: 2px solid  #d773ff;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -242,7 +245,7 @@ body {
 }
 
 #logoutBtn:hover {
-  background-color: #de4ac3;
+  background-color:#d773ff;
   color: white;
 }
 
@@ -264,7 +267,7 @@ body {
 .game-buttons button {
   padding: 12px 20px;
   font-size: 18px;
-  background-color: #de4ac3;
+  background-color: #d773ff;
   color: white;
   border: none;
   border-radius: 12px;
@@ -273,7 +276,7 @@ body {
 }
 
 .game-buttons button:hover {
-  background-color: #c23cb0;
+  background-color: #dc8dfc;
 }
 
 .game-section {
@@ -287,15 +290,15 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: "Poppins";
+  font-family: 'Fredoka', sans-serif;
 }
 
 .container {
-  background: rgb(140, 207, 236);
+  background: #c9a7ff;
   border-radius: 10px;
   padding: 25px;
   margin-top: 10px;
-  box-shadow: 14px 14px 0 0 #ffffff;
+  /* box-shadow: 14px 14px 0 0 #ffffff; */
 }
 
 .gameCards {
@@ -306,12 +309,12 @@ body {
 }
 
 .cards {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 10px;
   cursor: pointer;
   border: 1 px solid rgb(255, 255, 255);
-  background: rgb(23, 37, 84);
+  background: #ede2fe;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -339,7 +342,7 @@ body {
   border-radius: 10px;
   border: none;
   outline: none;
-  background:rgb(23, 37, 84);
+  background:  #ffcf96;
   color: white;
   cursor: pointer;
   box-shadow: 10px 10px 5 px rgb(255, 255, 255);
@@ -378,7 +381,7 @@ body {
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  color:rgb(23, 37, 84);
+  color:#cbaafd;
   text-transform: capitalize;
   cursor: pointer;
   user-select: none;
@@ -478,21 +481,6 @@ body {
   cursor: grabbing;
 }
 
-
-/* #sortTitle {
-  font-family: 'Pacifico', cursive;
-  font-size: clamp(2rem, 5vw, 4em);
-  font-weight: 700;
-  background: linear-gradient(270deg, #f39c12, #4a90e2, #f39c12);
-  background-size: 600% 600%;
-  /* -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: white;
-  animation: gradientMove 8s ease infinite;
-  text-align: center;
-  user-select: none;
-  margin: 50px 0;
-} */ 
-
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -528,7 +516,6 @@ body {
   border-radius: 8px;
 }
 
-
 .level-btn:hover {
   background: rgb(160, 159, 159);
   color: white;
@@ -555,7 +542,6 @@ body {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   animation: rise 10s linear infinite;
 }
-
 
 .bubble:nth-child(1) { width: 30px; height: 30px; left: 10%; animation-delay: 0s; }
 .bubble:nth-child(2) { width: 20px; height: 20px; left: 30%; animation-delay: 2s; }
@@ -606,6 +592,29 @@ body {
 }
 
 /* photo gallery */
+#addMem, #resetMem {
+  text-align: center;
+  background-color:  #bcffe1;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 5px;
+  margin-bottom: 18px;
+}
+
+input[type="file"] {
+  display: inline-block;
+  font-size: 16px;
+}
+
+#captionInput {
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -618,6 +627,7 @@ body {
 }
 .gallery img {
   width: 100%;
+  max-width: 140px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -626,52 +636,135 @@ body {
   margin: 5px 0 0;
 }
 
+/* notes and todos section */
+#todo-section, #notes-section {
+  text-align: center;
+  margin: 30px auto;
+  max-width: 520px;
+  background: #eafff7;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
 
-/* To-do list/Notes section */
-/* TASK BUBBLE STYLES */
-#todo-list { padding: 0; margin: 12px 0; }
+#todo-section h2, #notes-section h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
+
+/* input & add button */
+#todo-input {
+  padding: 10px;
+  width: 65%;
+  border: 2px solid #d773ff;
+  border-radius: 12px;
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+#add-btn {
+  background: #ffe096;
+  color: #444;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#add-btn:hover {
+  background: #ffcf96;
+  transform: scale(1.05);
+}
+
+/* task bubbles */
+#todo-list { padding: 0; margin: 16px 0; }
 .task-bubble {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
-  padding: 10px 12px;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  max-width: 480px;
-  margin: 8px auto; /* centers each bubble */
+  background: white;
+  padding: 12px 14px;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin: 10px auto;
+  transition: 0.2s ease;
+}
+.task-bubble:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.task-label { display: flex; align-items: center; gap: 10px; flex: 1; cursor: pointer; }
-
-.task-checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: #4a90e2; /* nice blue check color */
-}
-
-.task-text {
-  font-size: 15px;
-  color: #222;
-  word-break: break-word;
-}
-
-/* finished look */
-.task-done .task-text {
-  text-decoration: line-through;
-  color: #777;
-  opacity: 0.7;
-}
+.task-label { flex: 1; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.task-checkbox { width: 18px; height: 18px; accent-color: #bcffe1; }
+.task-text { font-size: 15px; color: #333; }
+.task-done .task-text { text-decoration: line-through; color: #888; }
 
 /* delete button */
 .task-delete {
   background: transparent;
   border: none;
-  color: #c33;
-  font-size: 16px;
+  color: #ff6f6f;
+  font-size: 18px;
   cursor: pointer;
   padding: 4px;
   border-radius: 6px;
 }
-.task-delete:hover { background: rgba(0,0,0,0.04); }
+.task-delete:hover { background: rgba(0,0,0,0.05); }
+
+/* Notes box */
+#daily-notes {
+  width: 90%;
+  height: 120px;
+  border-radius: 12px;
+  border: 2px solid #d773ff;
+  padding: 10px;
+  font-size: 15px;
+  resize: none;
+  background: white;
+  margin-bottom: 10px;
+}
+
+#save-notes-btn {
+  background: #ffe096;
+  color: #444;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#save-notes-btn:hover {
+  background: #ffcf96;
+  transform: scale(1.05);
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
+  line-height: 1.7;
+}
+
+p {
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.7;
+}
+
+/* music toggle button */
+#music-btn {
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  color: #ffaed6;
+  cursor: pointer;
+}
+
+#music-btn:hover, #music-btn:active {
+  background-color: #d773ff;
+}

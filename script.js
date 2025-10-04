@@ -21,7 +21,7 @@ window.onload = function () {
   if (name) {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('hovers').style.display = 'block';
-    document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#de4ac3">${name}</span> 🧠`;
+    document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#d773ff">${name}</span> 🧠`;
     createMemoryGame();
   } else {
     document.getElementById('loginScreen').style.display = 'block';
@@ -401,12 +401,7 @@ function checkFirstWordIdea(bulb){
 
 
 // sorting game code below
-const audio = new Audio("dreamy.mp3");
-const bubbleSound = new Audio("bubble.mp3");
-const doneSlotSound = new Audio("doneSlot.mp3");
-const levelComplete = new Audio("levelComplete.mp3");
-audio.play();
-audio.loop = true;
+
 let lockedTubes = new Set();
 
 // Different ball sets for different levels
@@ -508,9 +503,7 @@ function render() {
       tubeDiv.classList.add("locked");
 
       if (!lockedTubes.has(index)) {
-        doneSlotSound.currentTime = 0; // dubara start se bajao
-        doneSlotSound.play(); // ✅ sound play
-        lockedTubes.add(index); // yaad rakho ki ye tube complete ho gayi
+        lockedTubes.add(index); 
       }
     }
 
@@ -542,14 +535,12 @@ function handleDragStart(e) {
   const tube = tubes[tubeIndex];
   const topBall = tube[tube.length - 1];
 
-  // Only top ball can be dragged
+  
   if (topBall.id != ballId) {
     e.preventDefault();
     return;
   }
-  // ✅ Play bubble sound
-  bubbleSound.currentTime = 0; // reset to start
-  bubbleSound.play();
+  
   e.dataTransfer.setData(
     "text/plain",
     JSON.stringify({ id: ballId, from: tubeIndex })
@@ -580,9 +571,7 @@ function handleDrop(e) {
 
   if (canDrop) {
     toTube.push(fromTube.pop());
-    // ✅ Play bubble sound again on drop
-    bubbleSound.currentTime = 0;
-    bubbleSound.play();
+
     render();
     checkCompletion();
   }
@@ -602,10 +591,7 @@ function checkCompletion() {
 
   if (allComplete) {
     setTimeout(() => {
-      audio.pause();
-      levelComplete.play();
       alert("🎉 Level " + currentLevel + " completed! You win!");
-      audio.play();
 
       showHomeScreen();
     }, 200);
@@ -753,6 +739,7 @@ function initSortingGameListeners() {
 // });
 
 // Store memories safely
+
 let memories = [];
 try {
   memories = JSON.parse(localStorage.getItem("memories")) || [];
@@ -836,25 +823,23 @@ document.addEventListener("DOMContentLoaded", () => {
 // notes and todos code below
 
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("todo-input");   // ADDED: expected in HTML
-  const addBtn = document.getElementById("add-btn");     // ADDED: expected in HTML
-  const list = document.getElementById("todo-list");     // ADDED: expected in HTML
+  const input = document.getElementById("todo-input");   
+  const addBtn = document.getElementById("add-btn");     
+  const list = document.getElementById("todo-list");     
   const notesBox = document.getElementById("daily-notes");
   const saveNotesBtn = document.getElementById("save-notes-btn");
 
-  // --- load / migrate tasks ---
+
   function loadTasksFromStorage() {
-    // If we already have the new format, use it
     let stored = localStorage.getItem("tasksObj");
     if (stored) {
       try {
         return JSON.parse(stored) || [];
       } catch {
-        // fall through to older format
       }
     }
 
-    // Migration: if there is an old "tasks" array of strings, convert it
+
     const old = JSON.parse(localStorage.getItem("tasks")) || [];
     if (old.length) {
       const migrated = old.map((t, i) => ({ id: Date.now() + i, text: t, done: false }));
@@ -867,7 +852,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let tasks = loadTasksFromStorage();
 
-  // --- rendering ---
+
   function renderTasks() {
     list.innerHTML = "";
     tasks.forEach(task => {
@@ -907,12 +892,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- persistence ---
   function saveTasks() {
     localStorage.setItem("tasksObj", JSON.stringify(tasks));
   }
 
-  // --- actions ---
+  // actions
   function addTask() {
     const text = input.value.trim();
     if (!text) return;
@@ -955,7 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- notes save (keeps previous behavior) ---
+  // notes save (keeps previous behavior)
   if (saveNotesBtn && notesBox) {
     saveNotesBtn.addEventListener("click", () => {
       localStorage.setItem("notes", notesBox.value);
@@ -967,4 +951,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // initial render
   renderTasks();
+});
+
+// music
+
+const music = document.getElementById("bgMusic");
+const toggleBtn = document.getElementById("music-btn");
+
+let isPlaying = false;
+let currentTrack = 0;
+
+// playlist of songs
+const playlist = [
+  "music/laufey_fts.mp3",
+  "music/JVKE.mp3",
+  "music/laufey_fb.mp3"
+];
+
+// Load the first track
+music.src = playlist[currentTrack];
+
+// When one song ends, move to the next
+music.addEventListener("ended", () => {
+  currentTrack = (currentTrack + 1) % playlist.length; // loops back at end
+  music.src = playlist[currentTrack];
+  music.play();
+});
+
+// Toggle play/pause
+toggleBtn.addEventListener("click", () => {
+  if (isPlaying) {
+    music.pause();
+    toggleBtn.textContent = "🎵 Play Music";
+  } else {
+    music.play();
+    toggleBtn.textContent = "⏸️ Pause Music";
+  }
+  isPlaying = !isPlaying;
 });
