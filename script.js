@@ -16,7 +16,7 @@ function switchPage(pageId, button) {
 
 // On load: Check if user is remembered
 window.onload = function () {
-  const name = localStoragep.getItem('userName');
+  const name = localStorage.getItem('userName');
 
   if (name) {
     document.getElementById('loginScreen').style.display = 'none';
@@ -871,6 +871,9 @@ const playlist = [
 
 // Load the first track
 music.src = playlist[currentTrack];
+
+music.loop = false;
+music.preload = "auto";
 
 // When one song ends, move to the next
 music.addEventListener("ended", () => {
