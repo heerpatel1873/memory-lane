@@ -25,7 +25,7 @@
   <!-- App Header -->
   <header class="banner">
     <div class="logo-title">
-      <img id="logo" src="memorylanelogo.png">
+      <img id="logo" src="images/memorylanelogo.png">
     </div>
     <h1 id="title"><b>Memory Lane</b></h1>
 
@@ -40,6 +40,12 @@
     </nav>
   </header>
 
+  <div class="subheader">
+    <div class="streak">🔥 Streak: <span id="streakCount">0</span></div>
+    <button id="music-btn">Play Music</button>
+    <button id="textToggle">Large Text</button>
+  </div>
+
   <audio id="bgMusic"></audio>
 
   <!-- Main App Content -->
@@ -47,7 +53,7 @@
     <!-- Home Page -->
     <div id="home" class="page active">
       <h1 id="homeHeading">Welcome Home</h1>
-      <p>"Every moment of joy, no matter how small, is a victory worth celebrating. Let's make every day count and cherish the small victories that make life worth living."</p>
+      <p id="dailyQuote"></p>
       <div id="welcomeMessage"></div>
       <h2>photo gallery</h2>
       <p>Upload pictures of memories and people to be featured below. Add captions to remember special moments!</p>
@@ -87,7 +93,7 @@
         <button class="game-btn" onclick="showGame('sortingGame')">Sorting</button>
       </div>
 
-      <button id="music-btn">Play Music</button>
+      <!-- <button id="music-btn">Play Music</button> -->
 
       <!-- Games -->
       <div id="matchingGame" class="game-section">
@@ -164,11 +170,58 @@
 
     <!-- Info Page -->
     <div id="info" class="page">
-      <h1>About Alzheimer's and Dementia</h1>
-      <p>Alzheimer's disease is a form of dementia. There is no cure, but there are treatments that can help manage symptons. Symptoms include: difficulties problem solving, confusion with time or place, personality and mood changes, trouble speaking, walking, or swallowing.</p>
-      <div id="video">
-        <iframe width="500" height="300" src="https://www.youtube.com/embed/20UZ6glSeo0" allowfullscreen></iframe>
-      </div>
+      <h1>About Alzheimer's Disease</h1>
+      <section class="info-section">
+        <h2>🧠 What is Alzheimer's Disease?</h2>
+        <p>
+          Alzheimer's disease is a <strong>progressive brain disorder</strong> that can be caused by dementia and often leads to 
+          memory loss, cognitive decline, and ultimately the inability to perform everyday tasks. 
+          Early symptoms may include:
+        </p>
+
+        <ul>
+          <li><strong>Memory Loss</strong> → Difficulty remembering recent events or conversations</li>
+          <li><strong>Cognitive Decline</strong> → Challenges in problem-solving, planning, and completing familiar tasks</li>
+          <li><strong>Behavioral Changes</strong> → Mood swings, confusion, and changes in personality</li>
+        </ul>
+
+        <h3>💖 Why We Created Memory Lane</h3>
+        <p>
+          While these conditions can sound overwhelming, living with memory changes doesn’t mean losing joy, connection, or comfort. 
+          That’s exactly why we created <strong>Memory Lane</strong> — 
+          to make each day a little brighter and easier for you! 🌷
+        </p>
+
+        <p>
+          Our app provides a range of <strong>games</strong> that will help  memory retention, problem-solving, and stress relief! Cognitive training and entertainment can all be found here! 
+          You can even listen to some music while you play some games, jot down some things on your to-do list, or write some notes down.
+          Music is shown to have a positive effect on cognitive function, improving attention and supporting emotion regulation. 
+          If you do not enjoy the music, you can always turn it off to enjoy quiet scenes!
+        </p>
+
+        <h3>🎮 Our Games & How They Help</h3>
+        <ul>
+          <li><strong>🧩 Matching</strong> — Strengthens memory recall by encouraging players to find and connect pairs, boosting attention and recognition skills.</li>
+          <li><strong>✏️ Word Guess</strong> — Stimulates language and problem-solving by encouraging word recall and vocabulary use, keeping the mind active and engaged.</li>
+          <li><strong>🎨 Sorting</strong> — Supports organization and focus by asking players to group items, which helps reinforce categorization skills and decision-making.</li>
+        </ul>
+
+        <h3>🎥 Informational Videos</h3>
+        <div id="videos">
+          <iframe width="480" height="270" src="https://www.youtube.com/embed/w6EqyEjuq3A" title="What is Alzheimer&#39;s Disease and Why Does it Happen? What Can You Do to Take Preventive Measures?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="480" height="270" src="https://www.youtube.com/embed/Eq_Er-tqPsA" title="Understand Alzheimer&#39;s Disease in 3 Minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <p class="disclaimer">
+          <em>✨ Memory Lane is designed to support daily life with memory changes, 
+          but it is not a medical service. If you notice new or worsening symptoms, 
+          please reach out to a healthcare professional.
+          
+          <strong>Alzheimer's Association (24/7 Helpline)</strong>: 1-800-272-3900 | <a href="https://www.alz.org">alz.org</a> <br>
+          </em>
+        </p>
+      </section>
+
     </div>
 
     <script src="script.js" defer></script>
