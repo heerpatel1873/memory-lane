@@ -31,6 +31,44 @@ body {
   left: 0;
   width: 100%;
   z-index: 1000;
+  text-shadow: 3px 3px 0 #3baebd;
+}
+
+.subheader {
+  position: fixed;
+  top: 120px; /* adjust to match your banner height */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffaed6;
+  padding: 10px 0;
+  border-bottom: 2px solid #fc5dad;
+  font-family: 'Fredoka', sans-serif;
+  z-index: 900;
+}
+
+.page > :first-child {
+  margin-top: 40px;
+}
+
+#hovers {
+  margin-top: 180px; /* adjust to match your banner + subheader height */
+}
+
+.subheader button {
+  background-color: #ffe096;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.subheader button:hover {
+  background-color: #ffd366;
 }
 
 #logo {
@@ -59,7 +97,7 @@ body {
 #games {
   background-color:  #fcdeb8;
   color: #fc5dad;
-  font-size: 17px;
+  font-size: 22px;
   padding-top: 20px;
   border: 10px dotted  #fc5dad;
 }
@@ -294,7 +332,7 @@ body {
 }
 
 .container {
-  background: #c9a7ff;
+  background: #d8c0ff;
   border-radius: 10px;
   padding: 25px;
   margin-top: 10px;
@@ -327,7 +365,7 @@ body {
 .cards:hover,
 .cards.active {
   background: white;
-  color:rgb(23, 37, 84);
+  color: #fc5dad; 
 }
 
 .btn {
@@ -343,7 +381,7 @@ body {
   border: none;
   outline: none;
   background:  #ffcf96;
-  color: white;
+  color: #e58715;
   cursor: pointer;
   box-shadow: 10px 10px 5 px rgb(255, 255, 255);
   user-select: none;
@@ -381,7 +419,7 @@ body {
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  color:#cbaafd;
+  color:#fc5dad;
   text-transform: capitalize;
   cursor: pointer;
   user-select: none;
@@ -761,10 +799,107 @@ p {
   padding: 8px 12px;
   border: none;
   border-radius: 8px;
-  color: #ffaed6;
+  color: rgb(255, 214, 238);
   cursor: pointer;
+  background-color: deeppink;
+  font-size: 20px;
 }
 
 #music-btn:hover, #music-btn:active {
-  background-color: #d773ff;
+  background-color: #f3f0ff;
+  color: #c37cfe;
+}
+
+/* daily quote animation */
+#dailyQuote {
+  animation: fadeIn 2s ease-in-out;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Large Text Accessibility */
+
+#textToggle {
+  font-size: 20px;
+}
+
+body.large-text, 
+body.large-text p, 
+body.large-text li, 
+body.large-text button, 
+body.large-text input, 
+body.large-text textarea {
+  font-size: 22px !important;
+  line-height: 1.9 !important;
+  letter-spacing: 0.3px;
+}
+
+
+/* info page layout */
+
+.info-section {
+  background-color: #eafff7; /* calm mint */
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 20px;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  text-align: left;
+  line-height: 1.7;
+}
+
+.info-section h2 {
+  color: #d773ff;
+  text-align: center;
+  font-family: 'Fredoka One', sans-serif;
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+.info-section h3 {
+  color: #ff96c9;
+  margin-top: 25px;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.info-section p {
+  color: #333;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.info-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.info-section li {
+  background: #fff6fa; /* soft pink box */
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #444;
+  font-size: 17px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-section strong {
+  color: #d773ff;
+}
+
+.info-section .disclaimer {
+  margin-top: 25px;
+  background-color: #ffefc2;
+  border-left: 5px solid #ffd366;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #444;
 }
