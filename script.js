@@ -409,9 +409,9 @@ const levels = {
   1: {
     // Easy - 3 colors
     ballImages: {
-      green: "images/1.png",
-      purple: "images/2.png",
-      blue: "images/3.png",
+      green: "./1.png",
+      purple: "./2.png",
+      blue: "./3.png",
     },
     tubeCount: 5,
     ballsPerTube: 4,
@@ -419,10 +419,10 @@ const levels = {
   2: {
     // Medium - 4 colors
     ballImages: {
-      green: "images/1.png",
-      purple: "images/2.png",
-      blue: "images/3.png",
-      orange: "images/4.png",
+      green: "./1.png",
+      purple: "./2.png",
+      blue: "./3.png",
+      orange: "./4.png",
     },
     tubeCount: 6,
     ballsPerTube: 4,
@@ -430,12 +430,12 @@ const levels = {
   3: {
     // Hard - 6 colors
     ballImages: {
-      green: "images/1.png",
-      purple: "images/2.png",
-      blue: "images/3.png",
-      orange: "images/4.png",
-      wave: "images/5.png",
-      stripe: "images/6.png",
+      green: "./1.png",
+      purple: "./2.png",
+      blue: "./3.png",
+      orange: "./4.png",
+      wave: "./5.png",
+      stripe: "./6.png",
     },
     tubeCount: 8,
     ballsPerTube: 4,
@@ -864,9 +864,9 @@ let currentTrack = 0;
 
 // playlist of songs
 const playlist = [
-  "music/laufey_fts.mp3",
-  "music/JVKE.mp3",
-  "music/laufey_fb.mp3"
+  "./laufey_fts.mp3",
+  "./JVKE.mp3",
+  "./laufey_fb.mp3"
 ];
 
 // Load the first track
