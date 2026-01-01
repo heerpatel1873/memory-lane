@@ -16,7 +16,7 @@ function switchPage(pageId, button) {
 
 // On load: Check if user is remembered
 window.onload = function () {
-  const name = localStorage.getItem('userName');
+  const name = localStoragep.getItem('userName');
 
   if (name) {
     document.getElementById('loginScreen').style.display = 'none';
@@ -37,7 +37,7 @@ function startApp() {
   localStorage.setItem('userName', name);
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('hovers').style.display = 'block';
-  document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#de4ac3">${name}</span> 🧠`;
+  document.getElementById('homeHeading').innerHTML = `Welcome Home, <span style="color:#d773ff">${name}</span> 🧠`;
 
   createMemoryGame();
 }
@@ -630,114 +630,6 @@ function initSortingGameListeners() {
 
 // pic gallery code BELOW
 
-// // Store memories
-// let memories = JSON.parse(localStorage.getItem("memories")) || [];
-// let currentIndex = 0;
-// let slideshowInterval;
-
-// function saveMemories() {
-//   localStorage.setItem("memories", JSON.stringify(memories));
-// }
-
-// function addMemory() {
-//   const photoInput = document.getElementById("photoUpload");
-//   const captionInput = document.getElementById("captionInput");
-
-//   const photo = photoInput.files[0];
-//   const caption = captionInput.value.trim();
-//   if (!photo || !caption) return;
-
-//   const reader = new FileReader();
-//   reader.onload = function (e) {
-//     const newMemory = { img: e.target.result, caption: caption };
-//     memories.push(newMemory);
-//     saveMemories();
-//     displayMemories();
-
-//     // Clear inputs
-//     photoInput.value = "";
-//     captionInput.value = "";
-//   };
-//   reader.readAsDataURL(photo);
-// }
-
-// // Attach function to button
-// document.getElementById("addMemoryBtn").addEventListener("click", addMemory);
-
-// // Display existing memories on load
-// function displayMemories() {
-//   const thumbnails = document.getElementById("thumbnails");
-//   thumbnails.innerHTML = "";
-
-//   memories.forEach((memory, index) => {
-//     const img = document.createElement("img");
-//     img.src = memory.img;
-//     img.alt = memory.caption;
-//     img.classList.add("thumbnail");
-
-//     img.addEventListener("click", () => {
-//       document.getElementById("bigPhoto").src = memory.img;
-//       document.getElementById("bigCaption").textContent = memory.caption;
-//     });
-
-//     thumbnails.appendChild(img);
-//   });
-
-//   // Show last added as featured
-//   if (memories.length > 0) {
-//     const last = memories[memories.length - 1];
-//     document.getElementById("bigPhoto").src = last.img;
-//     document.getElementById("bigCaption").textContent = last.caption;
-//   }
-// }
-
-// function displayThumbnails() {
-//   const container = document.getElementById("thumbnails");
-//   if (!container) return;
-//   container.innerHTML = "";
-//   memories.forEach((m,i) => {
-//     const thumb = document.createElement("img");
-//     thumb.src = m.img;
-//     thumb.style.width = "60px";
-//     thumb.style.margin = "5px";
-//     thumb.style.cursor = "pointer";
-//     thumb.onclick = () => showMemory(i);
-//     container.appendChild(thumb);
-//   });
-// }
-
-// function showMemory(index) {
-//   const bigPhoto = document.getElementById("bigPhoto");
-//   const bigCaption = document.getElementById("bigCaption");
-
-//   if (!bigPhoto || !bigCaption) return;
-
-//   currentIndex = index;
-//   bigPhoto.src = memories[index].img;
-//   bigCaption.innerText = memories[index].caption;
-// }
-
-// function startSlideshow() {
-//   if (slideshowInterval) clearInterval(slideshowInterval);
-//   slideshowInterval = setInterval(() => {
-//     if (memories.length > 0) {
-//       currentIndex = (currentIndex + 1) % memories.length;
-//       showMemory(currentIndex);
-//     }
-//   }, 5000);
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const addBtn = document.getElementById("addMemoryBtn");
-//   if (addBtn) addBtn.addEventListener("click", addMemory);
-
-//   if (memories.length > 0) {
-//     displayThumbnails();
-//     showMemory(0);
-//     startSlideshow();
-//   }
-// });
-
 // Store memories safely
 
 let memories = [];
@@ -763,9 +655,18 @@ function addMemory() {
 
   if (!photo) return;
 
+  // Always reload the latest memories from localStorage before adding
+  let latestMemories = [];
+  try {
+    latestMemories = JSON.parse(localStorage.getItem("memories")) || [];
+  } catch {
+    latestMemories = [];
+  }
+
   const reader = new FileReader();
   reader.onload = function (e) {
-    memories.push({ img: e.target.result, caption: caption });
+    latestMemories.push({ img: e.target.result, caption: caption });
+    memories = latestMemories;
     saveMemories();
     displayGallery();
     photoInput.value = "";
@@ -989,3 +890,43 @@ toggleBtn.addEventListener("click", () => {
   }
   isPlaying = !isPlaying;
 });
+
+// large text accessibility
+// large text accessibility
+const textToggle = document.getElementById("textToggle");
+let largeTextEnabled = false;
+
+textToggle.addEventListener("click", () => {
+  document.body.classList.toggle("large-text");
+  largeTextEnabled = !largeTextEnabled;
+  textToggle.textContent = largeTextEnabled ? "Large Text: On" : "Large Text: Off";
+});
+
+// streak timer
+let streak = localStorage.getItem("streak") || 1;
+document.getElementById("streakCount").textContent = streak;
+localStorage.setItem("streak", Number(streak) + 1);
+
+// daily quotes
+const quotes = [
+  "💖 Every moment of joy, no matter how small, is a victory worth celebrating. 💖",
+  "🧵 Memories are the threads that weave our story together. 🧵",
+  "😊 Even the faintest memory can bring the brightest smile. 😊",
+  "🌅 Cherish today, for tomorrow it becomes a beautiful memory. 🌅",
+  "🌸 Small joys make the biggest difference. 🌸",
+  "💭 A happy memory never fades — it simply lives quietly in our hearts. 💭",
+  "☀️ Each new day is a chance to make another precious memory. ☀️",
+  "🕊️ Peace lives in remembering love, not loss. 🕊️",
+  "🌷 The heart remembers what the mind forgets. 🌷",
+  "💫 Every smile shared is a memory made. 💫"
+];
+
+function showRandomQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const quoteElement = document.getElementById("dailyQuote");
+  if (quoteElement) {
+    quoteElement.textContent = quotes[randomIndex];
+  }
+}
+
+window.addEventListener("load", showRandomQuote);
